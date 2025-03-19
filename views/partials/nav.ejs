@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color:#393E46;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">BlogNest</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house"></i> Home</a>
+          </li>
+
+          <% if (locals.user) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/write"><i class="bi bi-pen"></i> Write</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i> <%= locals.user.fullName.split(" ")[0]%>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/user/signout">Signout</a></li>
+              </ul>
+            </li>
+          <% } else {%>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/signup">Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/signin">Signin</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+
+<% if (locals.error) { %>
+  <div class="container mt-4">
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
+  </div>
+<% } %>
+
+<% if(locals.success){ %>
+  <div class="container mt-4">
+    <div class="alert alert-success" role="alert">
+      <%=locals.success%>
+    </div>
+  </div>
+<% } %>
+
+<% if(locals.warning){ %>
+  <div class="container mt-4">
+    <div class="alert alert-warning" role="alert">
+      <%=locals.warning%>
+    </div>
+  </div>
+<% } %>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Signup</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+
+    <div class="container mt-5">
+        <form action="/user/signup" method="post">
+            <div class="mb-3 w-50"> 
+                <label for="fullName" class="form-label">Full name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName">
+            </div>
+            <div class="mb-3 w-50">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3 w-50">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <button type="submit" class="btn btn-custom">Submit</button>
+        </form>
+    </div>
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>

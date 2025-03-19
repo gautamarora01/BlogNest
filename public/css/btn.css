@@ -1,0 +1,110 @@
+.btn-custom {
+    background-color: #00ADB5;  /* Base background color */
+    color: white;               /* Text color */
+    border: none;               /* No border */
+    padding: 10px 18px;         /* Slightly larger padding */
+    border-radius: 6px;         /* More rounded corners */
+    font-weight: bold;          /* Make text bold */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+    text-align: center;
+    display: inline-block;
+}
+
+/* Hover effect */
+.btn-custom:hover {
+    background-color: #008C95;  /* Slightly darker teal */
+    color: white;
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow */
+}
+
+/* Active (when clicked) */
+.btn-custom:active {
+    background-color: #007981;  /* Even darker teal */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    transform: translateY(1px); /* Slight press effect */
+    color:white;
+}
+
+
+.btn-delete {
+    background-color: #FF4C4C; /* Bright red for delete */
+    color: white;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.btn-delete:hover {
+    background-color: #D63031; /* Darker red on hover */
+    transform: scale(1.05);
+    color:white;
+}
+
+/* Active state */
+.btn-delete:active {
+    background-color: #B22222; /* Even darker red */
+    transform: scale(0.98);
+    color:white;
+}
+
+/* Optional: If you want an icon inside */
+.btn-delete i {
+    margin-right: 5px;
+}
+
+
+/* General Button Styling */
+.btn-auth {
+    background-color: #00ADB5; /* Teal shade */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* Hover Effect */
+.btn-auth:hover {
+    color:white;
+    background-color: #008a92; /* Slightly darker teal */
+    transform: scale(1.05); /* Small zoom effect */
+}
+
+/* Active (When Clicked) */
+.btn-auth:active {
+    color:white;
+    background-color: #00666B;
+    transform: scale(0.95);
+}
+
+/* Signup Button (Green) */
+.btn-signup {
+    background-color: #4CAF50; /* Green */
+}
+
+.btn-signup:hover {
+    background-color: #43A047; /* Darker Green */
+}
+
+.btn-signup:active {
+    background-color: #388E3C; /* Even Darker Green */
+}
+
+
+/* Signin Button (Default Teal) */
+.btn-signin {
+    background-color: #00ADB5; /* Teal for Signin */
+}
+
+.btn-signin:hover {
+    background-color: #008a92; /* Darker Teal */
+}

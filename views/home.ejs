@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    
+    <title>Homepage</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+
+    <% if (locals.user) { %>
+
+        <div class="container mt-3"><h2 style="font-family:'Lucida Sans', 'Lucida Sans Regular'">Your Blogs</h2></div>
+        <div class="container mt-3 row row-cols-4 mx-auto">
+            <% blogs.forEach(blog => { %> 
+                <% if (user._id.toString() === blog.createdBy.toString()) { %>
+                    <div class="col">
+                        <div class="card mt-3" style="width: 18rem;">
+                            <img src="<%= blog.coverImageURL %>" class="card-img-top" style="width: 100%; height:200px; object-fit: cover;">
+                            <div class="card-body card-footer" style="background-color: #EEEEEE">
+                              <h5 class="card-title text-capitalize"><%= blog.title %></h5>
+                              <a href="/blog/<%=blog._id%>" class="btn btn-custom mt-1" >View</a>
+                              <a href="/blog/delete/<%= blog._id %>" class="btn btn-delete mt-1" ><i class="bi bi-trash"></i>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% }) %>
+        </div>
+
+        <div class="container mt-5"><h2 style="font-family:'Lucida Sans', 'Lucida Sans Regular';">All Blogs</h2></div>
+        <div class="container mt-3 mb-5 row row-cols-4 mx-auto">
+            <% blogs.forEach(blog => { %>
+                <div class="col">
+                    <div class="card mt-3" style="width: 18rem;">
+                        <img src="<%= blog.coverImageURL %>" class="card-img-top" style="width: 100%; height:200px; object-fit: cover;">
+                        <div class="card-body card-footer" style="background-color: #EEEEEE">
+                          <h5 class="card-title text-capitalize"><%= blog.title %></h5>
+                          <a href="/blog/<%=blog._id%>" class="btn btn-custom mt-1" >View</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <%- include("./partials/footer") %>
+
+    <%} else { %>
+        <div class="container mt-3" style=" width: 30%; border:1px solid black; border-radius: 5px;">
+            <div class="container d-flex flex-column">
+                <div><p class="fw-bold mt-2">Let's sign you up</p></div>
+                <div class="mb-1"><p><a href="/user/signup" class="btn btn-auth btn-signup">Signup</a></p></div>
+                <div><p class="fw-bold">Already have an account?</p></div>
+                <div ><p><a href="/user/signin" class="btn btn-auth">Signin</a></p></div>
+            </div>  
+        </div>
+    <% } %>
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>
