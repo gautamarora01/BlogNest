@@ -25,6 +25,46 @@ body.guest{
   background-position: top center;
 }
 
+a {
+  color: #0d6efd;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #117a8b;
+  border-color: #117a8b;
+  color:white;
+}
+.pagination .page-link {
+  color: #117a8b;
+}
+
+
+.blog-body {
+  white-space: pre-wrap;
+  background-color: #fdfdfd;
+  font-family: 'Georgia', serif;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: #333;
+  border-left: 4px solid #138496;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.comment-container {
+  border-left: 4px solid #17a2b8;
+  transition: background 0.3s ease;
+}
+
+.comment-container:hover {
+  background-color: #f1f1f1;
+}
+
+.comment-body {
+  font-size: 0.95rem;
+  color: #333;
+  word-wrap: break-word;
+}
+
 .auth-container{
   min-height: 80vh;
   display: flex;
