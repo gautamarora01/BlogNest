@@ -7,6 +7,72 @@ html, body {
     overflow-x: hidden;
 }
 
+body{
+  background-image: url('/images/45degreee_fabric.webp');
+  background-repeat: repeat;
+  background-size: auto;     
+  background-position: center center;
+}
+
+body.user{
+  animation: backgroundScroll 25s linear infinite;
+}
+
+body.guest{
+  background-image: url('/images/initial-background-image.jpg');
+  background-repeat: repeat-x;
+  background-size: cover;
+  background-position: top center;
+}
+
+.auth-container{
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 50%;
+  padding: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  text-align: center;
+  color: white;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+.btn-signup {
+  background: linear-gradient(45deg, #28a745, #218838);
+}
+
+.btn-signup:hover {
+  background: linear-gradient(45deg, #218838, #1e7e34);
+  transform: translateY(-2px);
+}
+
+.btn-signin {
+  background: linear-gradient(45deg, #17a2b8, #138496);
+}
+
+.btn-signin:hover {
+  background: linear-gradient(45deg, #138496, #117a8b);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @media (max-width: 576px) {
     .footer p {
@@ -20,9 +86,9 @@ html, body {
 }
 
 .logo-text {
-    font-size: inherit; /* Keeps the size as set by Bootstrap */
+    
     font-weight: bold;
-    background: linear-gradient(120deg, #ffffff, #cccccc, #ffffff);
+    background: linear-gradient(270deg, #6e6e6e,#eeeeee, #ffffff, #6e6e6e);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -41,4 +107,23 @@ html, body {
     }
   }
   
+  @keyframes backgroundScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+  }
   
+  
+  /* Dark Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #555; /* Scrollbar thumb */
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; /* Slightly lighter on hover */
+}

@@ -5,12 +5,12 @@
     
     <title>Homepage</title>
 </head>
-<body>
+<body class="<%= locals.user ? 'user' : 'guest' %>">
     <%- include("./partials/nav") %>
 
     <% if (locals.user) { %>
 
-        <div class="container mt-3"><h2 style="font-family:'Lucida Sans', 'Lucida Sans Regular'">Your Blogs</h2></div>
+        <div class="container mt-3"><h2 style="font-family: 'Poppins', 'Lucida Sans Regular'">Your Blogs</h2></div>
         <div class="container mt-3 mb-5 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mx-auto">
             <% blogs.forEach(blog => { %> 
                 <% if (user._id.toString() === blog.createdBy.toString()) { %>
@@ -28,7 +28,7 @@
             <% }) %>
         </div>
 
-        <div class="container mt-5"><h2 style="font-family:'Lucida Sans', 'Lucida Sans Regular';">All Blogs</h2></div>
+        <div class="container mt-5"><h2 style="font-family:'Poppins', 'Lucida Sans Regular';">All Blogs</h2></div>
         <div class="container mt-3 mb-5 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mx-auto">
             <% blogs.forEach(blog => { %>
                 <div class="col">
@@ -45,12 +45,13 @@
         <%- include("./partials/footer") %>
 
     <%} else { %>
-        <div class="container mt-3" style=" width: 60%; border:1px solid black; border-radius: 5px;">
-            <div class="container d-flex flex-column">
-                <div><p class="fw-bold mt-2">Let's sign you up</p></div>
+        
+        <div class="auth-container">
+            <div class="auth-card" style="font-family: 'Poppins';">
+                <div><p class="fw-bold mt-2" >Let's sign you up</p></div>
                 <div class="mb-1"><p><a href="/user/signup" class="btn btn-auth btn-signup">Signup</a></p></div>
                 <div><p class="fw-bold">Already have an account?</p></div>
-                <div ><p><a href="/user/signin" class="btn btn-auth">Signin</a></p></div>
+                <div ><p><a href="/user/signin" class="btn btn-auth btn-signin">Signin</a></p></div>
             </div>  
         </div>
     <% } %>

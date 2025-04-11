@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Edit Profile</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+
+    <div class="container mt-4">
+        <form action="/user/edit-profile-upload" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="profileImage" class="form-label">Add Profile Image</label>
+                <input class="form-control" type="file" id="profileImage" name="profileImage">
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-custom">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    
+    <%- include("./partials/scripts") %>
+</body>
+</html>

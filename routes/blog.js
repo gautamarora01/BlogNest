@@ -1,6 +1,7 @@
 const express=require("express");
 const {Router}=require("express");
 const multer=require("multer");
+const {storage}=require("../services/cloudinary");
 const path=require("path");
 
 const Blog=require("../models/blog");
@@ -10,15 +11,15 @@ const router=Router();
 
 router.use(express.static(path.resolve("./public")));
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.resolve(`./public/uploads`));
-    },
-    filename: function (req, file, cb) {
-      const fileName = `${Date.now()}-${req.user._id}-${file.originalname}`
-      cb(null,fileName); 
-    },
-})
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, path.resolve(`./public/uploads`));
+//     },
+//     filename: function (req, file, cb) {
+//       const fileName = `${Date.now()}-${req.user._id}-${file.originalname}`
+//       cb(null,fileName); 
+//     },
+// })
 
 const fileFilterMiddleware = (req, file, cb) => {
     const fileSize = parseInt(req.headers["content-length"])
@@ -54,23 +55,32 @@ router.get("/:id",async (req,res)=>{
     });
 });
 
-router.post("/",upload.single("coverImage"),async (req,res)=>{
-    const {title,body}=req.body;
-    let coverImage = req.file ? req.file.filename : "defaultCoverImage.png";
+router.post("/", upload.single("coverImage"), async (req, res) => {
+    try {
+        const { title, body } = req.body;
+        let coverImage = req.file ? req.file.path : "uploads/defaultCoverImage.png";
 
-    if(!title || !body){
-        return res.render("writeBlog",{
-            error:"Title and Body are necessary",
+        if (!title || !body) {
+            return res.render("writeBlog", {
+                error: "Title and Body are necessary",
+            });
+        }
+
+        const blog = await Blog.create({
+            body,
+            title,
+            createdBy: req.user._id,
+            coverImageURL: coverImage,
+        });
+
+        return res.redirect(`/blog/${blog._id}`);
+    } catch (err) {
+        console.error("Error creating blog:", err);
+
+        return res.status(500).render("writeBlog", {
+            error: "Something went wrong while uploading your blog. Please try again.",
         });
     }
-
-    const blog= await Blog.create({
-        body,
-        title,
-        createdBy:req.user._id,
-        coverImageURL: `uploads/${coverImage}`,
-    })
-    return res.redirect(`/blog/${blog._id}`);
 });
 
 

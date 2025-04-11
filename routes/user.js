@@ -1,7 +1,24 @@
 const {Router}=require("express");
 const User=require("../models/user");
-
+const multer=require("multer");
 const router=Router();
+const {storageProfile}=require("../services/cloudinary");
+
+const fileFilterMiddleware = (req, file, cb) => {
+    const fileSize = parseInt(req.headers["content-length"])
+
+    if ((file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg" || file.mimetype === "image/webp") && fileSize <= 1282810) {
+        cb(null, true)
+    } 
+    else {
+        cb(null, false)
+    }
+}
+
+const upload = multer({ 
+    storage: storageProfile,
+    fileFilter:fileFilterMiddleware,
+});
 
 router.get("/signin",(req,res)=>{
     return res.render("signin");
@@ -9,6 +26,27 @@ router.get("/signin",(req,res)=>{
 
 router.get("/signup",(req,res)=>{
     return res.render("signup");
+});
+
+router.get("/edit-profile",(req,res)=>{
+    return res.render("edit-profile",{user:req.user});
+})
+
+
+router.post("/edit-profile-upload",upload.single("profileImage"),async (req,res)=>{
+    try {
+        const profileImage = req.file ? req.file.path : "images/default.png"; // Cloudinary URL or fallback
+
+        // Update user in DB
+        await User.findByIdAndUpdate(req.user._id, {
+            profileImageURL: profileImage
+        });
+
+        return res.redirect("/");
+    } catch (error) {
+        console.error("Error uploading profile image:", error);
+        return res.status(500).send("Something went wrong");
+    }
 });
 
 router.post("/signin", async(req,res)=>{
