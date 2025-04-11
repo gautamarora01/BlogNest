@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>BlogNest</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    
+    
+    <div class="container mt-4">
+        <h2>Search Results for "<%= query %>"</h2>
+    
+        <% if (blogs.length > 0) { %>
+            <div class="container mt-3 mb-5 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mx-auto">
+                <% blogs.forEach(blog => { %>
+                    <div class="col">
+                        <div class="card mt-3" style="width: 18rem;">
+                            <img src="<%= blog.coverImageURL %>" class="card-img-top" style="width: 100%; height:200px; object-fit: cover;">
+                            <div class="card-body card-footer" style="background-color: #EEEEEE">
+                              <h5 class="card-title text-capitalize"><%= blog.title %></h5>
+                              <p class="card-text"><%= blog.body.substring(0, 20) %>...</p>
+                              <a href="/blog/<%=blog._id%>" class="btn btn-custom mt-1" >View</a>
+                              <% if (user.role==="ADMIN") { %>
+                                <a href="/blog/delete/<%= blog._id %>" class="btn btn-delete mt-1" ><i class="bi bi-trash"></i>Delete</a>
+                              <% } %>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+        <p class="mt-3">No blogs found matching your search.</p>
+        <% } %>
+    </div>
+
+    <% if (totalPages > 1) { %>
+        <nav class="mt-4">
+          <ul class="pagination justify-content-center">
+            <% for (let i = 1; i <= totalPages; i++) { %>
+              <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                <a class="page-link" href="/blog/search?q=<%= query %>&page=<%= i %>"><%= i %></a>
+              </li>
+            <% } %>
+          </ul>
+        </nav>
+      <% } %>
+
+    <%- include("./partials/footer") %>
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>

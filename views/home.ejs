@@ -3,7 +3,7 @@
 <head>
     <%- include("./partials/head") %>
     
-    <title>Homepage</title>
+    <title>BlogNest</title>
 </head>
 <body class="<%= locals.user ? 'user' : 'guest' %>">
     <%- include("./partials/nav") %>
@@ -42,7 +42,7 @@
                 </div>
             <% }) %>
         </div>
-        <%- include("./partials/footer") %>
+        
 
     <%} else { %>
         
@@ -57,5 +57,6 @@
     <% } %>
 
     <%- include("./partials/scripts") %>
+    <%- include("./partials/footer") %>
 </body>
 </html>

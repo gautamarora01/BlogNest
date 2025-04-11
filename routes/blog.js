@@ -43,6 +43,42 @@ router.get("/write",(req,res)=>{
     });
 });
 
+
+router.get("/search", async (req, res) => {
+    const query = req.query.q || "";
+    const page = parseInt(req.query.page) || 1;
+    const limit = 6;
+
+    try {
+        const filter = {
+            $or: [
+                { title: { $regex: query, $options: "i" } },
+                { body: { $regex: query, $options: "i" } }
+            ]
+        };
+
+        const totalBlogs = await Blog.countDocuments(filter);
+        const blogs = await Blog.find(filter)
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .sort({ createdAt: -1 });
+
+        res.render("search", {
+            user: req.user,
+            blogs,
+            query,
+            currentPage: page,
+            totalPages: Math.ceil(totalBlogs / limit)
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.render("home", { user: req.user, error: "Something went wrong!" });
+    }
+});
+
+
+
 router.get("/:id",async (req,res)=>{
     const blog=await Blog.findById(req.params.id).populate("createdBy");
     
